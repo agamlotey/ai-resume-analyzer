@@ -1,0 +1,82 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="640" viewBox="0 0 1200 640" font-family="Helvetica, Arial, sans-serif">
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#3d4a66"/>
+    </marker>
+  </defs>
+  <rect width="1200" height="640" fill="#ffffff"/>
+
+  <!-- AWS cloud boundary -->
+  <rect x="200" y="20" width="980" height="600" rx="14" fill="#f7f9fc" stroke="#9aa7c0" stroke-dasharray="8 6"/>
+  <text x="222" y="50" font-size="17" font-weight="700" fill="#1f3864">AWS Cloud · us-east-1 (AWS Academy Sandbox)</text>
+  <rect x="860" y="32" width="300" height="30" rx="6" fill="#fff4e0" stroke="#e0a030"/>
+  <text x="1010" y="52" font-size="13" text-anchor="middle" fill="#7a4d00">CloudFormation: whole stack from one template</text>
+
+  <!-- User -->
+  <rect x="24" y="270" width="150" height="90" rx="12" fill="#ffffff" stroke="#3d4a66" stroke-width="1.5"/>
+  <text x="99" y="305" font-size="16" font-weight="700" text-anchor="middle" fill="#161a26">User</text>
+  <text x="99" y="327" font-size="13" text-anchor="middle" fill="#5d6478">Browser (HTML/JS)</text>
+  <text x="99" y="345" font-size="12" text-anchor="middle" fill="#5d6478">uploads PDF / DOCX</text>
+
+  <!-- ALB -->
+  <rect x="250" y="265" width="170" height="100" rx="12" fill="#e7ecfd" stroke="#3b5bdb" stroke-width="1.5"/>
+  <text x="335" y="300" font-size="15" font-weight="700" text-anchor="middle" fill="#1f3864">Application</text>
+  <text x="335" y="319" font-size="15" font-weight="700" text-anchor="middle" fill="#1f3864">Load Balancer</text>
+  <text x="335" y="342" font-size="12" text-anchor="middle" fill="#5d6478">HTTP :80, health checks</text>
+
+  <!-- ASG -->
+  <rect x="470" y="110" width="330" height="420" rx="12" fill="#eef7f0" stroke="#1f9d55" stroke-width="1.5"/>
+  <text x="635" y="140" font-size="15" font-weight="700" text-anchor="middle" fill="#14532d">EC2 Auto Scaling group</text>
+  <text x="635" y="160" font-size="12" text-anchor="middle" fill="#3f6b4f">t3.micro · min 1, max 3 · 2+ Availability Zones</text>
+  <g>
+    <rect x="495" y="180" width="280" height="120" rx="10" fill="#ffffff" stroke="#1f9d55"/>
+    <text x="635" y="206" font-size="14" font-weight="700" text-anchor="middle" fill="#161a26">EC2 instance (Amazon Linux 2023)</text>
+    <text x="635" y="230" font-size="13" text-anchor="middle" fill="#3d4a66">Gunicorn + Flask REST API</text>
+    <text x="635" y="250" font-size="13" text-anchor="middle" fill="#3d4a66">NLP parser and match scorer</text>
+    <text x="635" y="270" font-size="13" text-anchor="middle" fill="#3d4a66">serves the frontend</text>
+    <text x="635" y="290" font-size="11" text-anchor="middle" fill="#7a4d00">IAM: LabRole via LabInstanceProfile</text>
+  </g>
+  <g>
+    <rect x="495" y="320" width="280" height="70" rx="10" fill="#ffffff" stroke="#1f9d55" stroke-dasharray="5 4"/>
+    <text x="635" y="350" font-size="14" font-weight="700" text-anchor="middle" fill="#161a26">More instances added on load</text>
+    <text x="635" y="372" font-size="12" text-anchor="middle" fill="#5d6478">identical, stateless copies</text>
+  </g>
+  <rect x="495" y="420" width="280" height="80" rx="10" fill="#fdf1dc" stroke="#c27c0e"/>
+  <text x="635" y="450" font-size="14" font-weight="700" text-anchor="middle" fill="#7a4d00">CloudWatch</text>
+  <text x="635" y="472" font-size="12" text-anchor="middle" fill="#7a4d00">target tracking: average CPU 50%</text>
+  <text x="635" y="489" font-size="12" text-anchor="middle" fill="#7a4d00">scales out and in automatically</text>
+
+  <!-- Data services -->
+  <rect x="870" y="90" width="280" height="105" rx="12" fill="#ffffff" stroke="#3b5bdb" stroke-width="1.5"/>
+  <text x="1010" y="120" font-size="15" font-weight="700" text-anchor="middle" fill="#1f3864">Amazon S3</text>
+  <text x="1010" y="142" font-size="12" text-anchor="middle" fill="#5d6478">uploaded resumes, private bucket</text>
+  <text x="1010" y="160" font-size="12" text-anchor="middle" fill="#5d6478">SSE encryption, versioning</text>
+  <text x="1010" y="178" font-size="12" text-anchor="middle" fill="#5d6478">presigned download links</text>
+
+  <rect x="870" y="225" width="280" height="105" rx="12" fill="#ffffff" stroke="#3b5bdb" stroke-width="1.5"/>
+  <text x="1010" y="255" font-size="15" font-weight="700" text-anchor="middle" fill="#1f3864">Amazon DynamoDB</text>
+  <text x="1010" y="277" font-size="12" text-anchor="middle" fill="#5d6478">jobs table</text>
+  <text x="1010" y="295" font-size="12" text-anchor="middle" fill="#5d6478">matches table + user_id index</text>
+  <text x="1010" y="313" font-size="12" text-anchor="middle" fill="#5d6478">on-demand capacity (NoSQL)</text>
+
+  <rect x="870" y="360" width="280" height="105" rx="12" fill="#ffffff" stroke="#3b5bdb" stroke-width="1.5"/>
+  <text x="1010" y="390" font-size="15" font-weight="700" text-anchor="middle" fill="#1f3864">Amazon Cognito</text>
+  <text x="1010" y="412" font-size="12" text-anchor="middle" fill="#5d6478">user pool, sign up and login</text>
+  <text x="1010" y="430" font-size="12" text-anchor="middle" fill="#5d6478">JWT tokens, "admin" group</text>
+  <text x="1010" y="448" font-size="12" text-anchor="middle" fill="#5d6478">role-based access</text>
+
+  <rect x="870" y="495" width="280" height="80" rx="12" fill="#ffffff" stroke="#8a5cd6" stroke-width="1.5"/>
+  <text x="1010" y="525" font-size="15" font-weight="700" text-anchor="middle" fill="#4b2a8a">AWS Lambda</text>
+  <text x="1010" y="547" font-size="12" text-anchor="middle" fill="#5d6478">pre sign-up trigger, auto-confirm</text>
+
+  <!-- Arrows -->
+  <line x1="174" y1="315" x2="246" y2="315" stroke="#3d4a66" stroke-width="2" marker-end="url(#a)" marker-start="url(#a)"/>
+  <text x="210" y="298" font-size="11" text-anchor="middle" fill="#3d4a66">REST</text>
+  <line x1="420" y1="300" x2="491" y2="240" stroke="#3d4a66" stroke-width="2" marker-end="url(#a)"/>
+  <line x1="420" y1="330" x2="491" y2="355" stroke="#3d4a66" stroke-width="2" marker-end="url(#a)"/>
+  <line x1="775" y1="215" x2="866" y2="145" stroke="#3d4a66" stroke-width="2" marker-end="url(#a)"/>
+  <line x1="775" y1="245" x2="866" y2="275" stroke="#3d4a66" stroke-width="2" marker-end="url(#a)"/>
+  <line x1="775" y1="275" x2="866" y2="400" stroke="#3d4a66" stroke-width="2" marker-end="url(#a)"/>
+  <line x1="1010" y1="465" x2="1010" y2="491" stroke="#3d4a66" stroke-width="2" marker-end="url(#a)"/>
+  <line x1="635" y1="420" x2="635" y2="394" stroke="#c27c0e" stroke-width="2" marker-end="url(#a)"/>
+</svg>

@@ -46,6 +46,7 @@ flowchart LR
 backend/   Flask API (app.py), NLP (nlp.py, skills.py), storage/database/auth adapters, seed data
 frontend/  Single-page UI (HTML, CSS, vanilla JS), served by the backend
 infra/     CloudFormation template, deploy.sh, teardown.sh
+docs/      Project report (DOCX, PDF), presentation (PPTX, PDF), architecture diagram
 samples/   Sample resumes (PDF, DOCX) and a job description for the demo
 scripts/   load_test.py (shows auto scaling), make_samples.py
 tests/     Unit and API tests

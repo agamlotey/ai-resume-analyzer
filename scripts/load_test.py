@@ -48,7 +48,8 @@ def main():
                     served[result["served_by"]] += 1
             except Exception as e:
                 with lock:
-                    errors[type(e).__name__] += 1
+                    detail = getattr(e, "code", "") or getattr(e, "reason", "")
+                    errors[(type(e).__name__ + " " + str(detail)).strip()] += 1
 
     threads = [threading.Thread(target=worker, daemon=True) for _ in range(args.threads)]
     for t in threads:

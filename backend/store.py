@@ -40,9 +40,16 @@ class SqliteStore:
 
     def _run(self, sql, args=()):
         with self.lock:
-            cur = self.conn.execute(sql, args)
+            self.conn.execute(sql, args)
             self.conn.commit()
-            return cur
+
+    def _all(self, sql, args=()):
+        with self.lock:
+            return self.conn.execute(sql, args).fetchall()
+
+    def _one(self, sql, args=()):
+        with self.lock:
+            return self.conn.execute(sql, args).fetchone()
 
     def create_user(self, email, name, password_hash, role="user"):
         user = {"id": new_id(), "email": email.lower(), "name": name, "password_hash": password_hash,
@@ -51,7 +58,7 @@ class SqliteStore:
         return user
 
     def get_user_by_email(self, email):
-        row = self._run("SELECT * FROM users WHERE email=?", (email.lower(),)).fetchone()
+        row = self._one("SELECT * FROM users WHERE email=?", (email.lower(),))
         return dict(row) if row else None
 
     def put_job(self, job):
@@ -65,11 +72,11 @@ class SqliteStore:
         return job
 
     def list_jobs(self):
-        rows = self._run("SELECT * FROM jobs ORDER BY created_at DESC").fetchall()
+        rows = self._all("SELECT * FROM jobs ORDER BY created_at DESC")
         return [self._job(r) for r in rows]
 
     def get_job(self, job_id):
-        row = self._run("SELECT * FROM jobs WHERE id=?", (job_id,)).fetchone()
+        row = self._one("SELECT * FROM jobs WHERE id=?", (job_id,))
         return self._job(row) if row else None
 
     def delete_job(self, job_id):
@@ -89,13 +96,13 @@ class SqliteStore:
 
     def list_matches(self, user_id=None):
         if user_id:
-            rows = self._run("SELECT * FROM matches WHERE user_id=? ORDER BY created_at DESC", (user_id,)).fetchall()
+            rows = self._all("SELECT * FROM matches WHERE user_id=? ORDER BY created_at DESC", (user_id,))
         else:
-            rows = self._run("SELECT * FROM matches ORDER BY created_at DESC").fetchall()
+            rows = self._all("SELECT * FROM matches ORDER BY created_at DESC")
         return [self._match(r, False) for r in rows]
 
     def get_match(self, match_id):
-        row = self._run("SELECT * FROM matches WHERE id=?", (match_id,)).fetchone()
+        row = self._one("SELECT * FROM matches WHERE id=?", (match_id,))
         return self._match(row, True) if row else None
 
 
