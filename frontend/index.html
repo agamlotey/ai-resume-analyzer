@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ResumeMatch</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand"><span class="logo">RM</span> ResumeMatch <span class="tag">Cloud Resume Analyzer</span></div>
+    <nav id="nav" class="nav hidden">
+      <button data-view="analyze" class="active">Analyze</button>
+      <button data-view="history">History</button>
+      <button data-view="jobs">Jobs</button>
+      <button data-view="admin" class="admin-only hidden">Admin</button>
+    </nav>
+    <div id="userbox" class="userbox hidden">
+      <span id="username"></span><span id="rolebadge" class="badge"></span>
+      <button id="logout" class="ghost">Log out</button>
+    </div>
+  </header>
+
+  <main>
+    <section id="view-auth" class="view">
+      <div class="auth-wrap">
+        <div class="auth-intro">
+          <h1>See how well your resume fits the job.</h1>
+          <p>Upload your resume, pick a job, and get a match score, a skill-gap breakdown and specific suggestions to improve it.</p>
+          <ul class="feature-list">
+            <li>Reads PDF and DOCX resumes</li>
+            <li>Finds skills, experience and education with lightweight NLP</li>
+            <li>Keeps your match history in the cloud</li>
+          </ul>
+        </div>
+        <div class="card auth-card">
+          <div class="tabs">
+            <button id="tab-login" class="active">Log in</button>
+            <button id="tab-register">Sign up</button>
+          </div>
+          <form id="auth-form">
+            <label id="name-field" class="hidden">Name<input name="name" autocomplete="name"></label>
+            <label>Email<input name="email" type="email" required autocomplete="email"></label>
+            <label>Password<input name="password" type="password" required autocomplete="current-password"></label>
+            <p id="pw-hint" class="hint hidden">At least 8 characters, with an uppercase letter, a lowercase letter and a number.</p>
+            <button type="submit" class="primary" id="auth-submit">Log in</button>
+            <p id="auth-error" class="error"></p>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <section id="view-analyze" class="view hidden">
+      <div class="grid-2">
+        <form id="analyze-form" class="card">
+          <h2>1. Upload your resume</h2>
+          <label class="drop" id="drop">
+            <input type="file" name="resume" id="resume-input" accept=".pdf,.docx,.txt" hidden>
+            <span class="drop-icon">⬆</span>
+            <span id="drop-text">Drop a PDF or DOCX here, or <u>browse</u></span>
+            <span class="hint">Max 5 MB</span>
+          </label>
+          <h2>2. Choose the job</h2>
+          <div class="seg">
+            <button type="button" data-mode="posting" class="active">Job posting</button>
+            <button type="button" data-mode="custom">Paste a description</button>
+          </div>
+          <div id="mode-posting">
+            <select name="job_id" id="job-select"></select>
+            <p id="job-preview" class="hint"></p>
+          </div>
+          <div id="mode-custom" class="hidden">
+            <label>Job title<input name="job_title" placeholder="e.g. Backend Developer"></label>
+            <label>Job description<textarea name="job_description" rows="8" placeholder="Paste the full job description here"></textarea></label>
+          </div>
+          <button type="submit" class="primary" id="analyze-btn">Analyze match</button>
+          <p id="analyze-error" class="error"></p>
+        </form>
+        <div id="result" class="card result-empty">
+          <div class="empty">
+            <div class="empty-ring"></div>
+            <p>Your match score and skill-gap report will appear here.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="view-history" class="view hidden">
+      <div class="card">
+        <div class="row-between">
+          <h2>Match history</h2>
+          <label class="admin-only hidden inline"><input type="checkbox" id="history-all"> Show all users</label>
+        </div>
+        <div id="history-list"></div>
+      </div>
+      <div id="history-detail"></div>
+    </section>
+
+    <section id="view-jobs" class="view hidden">
+      <div class="card">
+        <h2>Job postings</h2>
+        <div id="jobs-list" class="jobs"></div>
+      </div>
+    </section>
+
+    <section id="view-admin" class="view hidden">
+      <div class="stats" id="stats"></div>
+      <div class="grid-2">
+        <form id="job-form" class="card">
+          <h2>Post a new job</h2>
+          <label>Title<input name="title" required></label>
+          <div class="grid-2 tight">
+            <label>Company<input name="company"></label>
+            <label>Location<input name="location"></label>
+          </div>
+          <label>Description<textarea name="description" rows="10" required></textarea></label>
+          <button class="primary" type="submit">Publish job</button>
+          <p id="job-error" class="error"></p>
+        </form>
+        <div class="card">
+          <h2>Most common missing skills</h2>
+          <div id="missing-chart"></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer" id="footer"></footer>
+  <div id="toast" class="toast hidden"></div>
+  <script src="app.js"></script>
+</body>
+</html>

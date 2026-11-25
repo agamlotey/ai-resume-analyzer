@@ -1,0 +1,15 @@
+Backend Developer (Python)
+
+We are hiring a Backend Developer to build APIs for our hiring platform.
+
+Responsibilities:
+- Design and build REST APIs in Python using Flask or FastAPI.
+- Store data in PostgreSQL and Redis, and design schemas for scale.
+- Containerize services with Docker and deploy them on AWS (EC2, S3, Lambda).
+- Write unit tests with pytest and maintain CI/CD pipelines with GitHub Actions.
+
+Requirements:
+- 1+ years of experience building backend services (internships count).
+- Bachelor's degree in Computer Science or related field.
+- Strong Python, SQL, Git and Linux skills.
+- Good communication and problem solving skills.
